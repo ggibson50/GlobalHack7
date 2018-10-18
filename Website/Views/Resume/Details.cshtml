@@ -1,0 +1,67 @@
+﻿@model Website.ViewModels.WorkResults
+
+@{
+     ViewBag.Title = "Details";
+}
+
+<div class="main-container-wrap">
+    <h2>@ViewBag.Title</h2>
+
+    <div>
+        <h4>Resume</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Resume.FirstName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Resume.FirstName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Resume.LastName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Resume.LastName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Resume.PhoneNumber)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Resume.PhoneNumber)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Resume.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Resume.Email)
+            </dd>
+            @if (Model.WorkExperiences[0] != null)
+            {
+                <dt>
+                    Work Experience
+                </dt>
+                foreach (var items in Model.WorkExperiences)
+                {
+                    <dd>
+                        @Html.DisplayFor(modelitem => items.BusinessName) @Html.DisplayFor(modelitem => items.JobTitle) @Html.DisplayFor(modelitem => items.StartDate) - @Html.DisplayFor(modelitem => items.EndDate)
+
+                    </dd>
+                    <dd>@Html.DisplayFor(modelitem => items.Description)</dd>
+                    <dd></dd>
+                } 
+            }
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", "Resume", new { id = Model.Resume.ResumeId }, null) |
+        @Html.ActionLink("Translate Resume", "Create", "TranslateResume", new { originalResumeId = Model.Resume.ResumeId}, null) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</div>

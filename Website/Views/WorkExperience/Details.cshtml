@@ -1,0 +1,68 @@
+﻿@model Website.Models.WorkExperience
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="main-container-wrap">
+    <h2>@ViewBag.Title</h2>
+
+    <div>
+        <h4>WorkExperience</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ResumeId)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ResumeId)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.BusinessName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BusinessName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.StartDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.EndDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.JobTitle)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.JobTitle)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.WorkExperienceId }) |
+        @Html.ActionLink("Back to Resume Edit", "Edit", "Resume", new { id = Model.ResumeId }, null)
+    </p>
+</div>

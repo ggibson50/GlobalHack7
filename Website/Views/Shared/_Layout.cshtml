@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-fixed-top fixed-top navbar-expand-md navbar-dark bg-dark">
+        <div class="container">
+            <div class="navbar-header">
+                @Html.ActionLink("JPU", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <button type="button" 
+                        class="navbar-toggle navbar-toggler" 
+                        data-toggle="collapse" 
+                        data-target="#navbarColor01"
+                        aria-controls="navbarColor01"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+            </div>
+            <div class="navbar-collapse collapse" id="navbarColor01">
+                <ul class="nav navbar-nav"style="width: 30%;">
+                    <li class="nav-item"><i class="fas fa-home d-inline-block"></i>@Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link d-inline-block" })</li>
+                    <li class="nav-item"><i class="fas fa-hammer d-inline-block"></i>@Html.ActionLink("Skills", "Index", "JobSkill", null, new { @class = "nav-link d-inline-block" })</li>
+                    <li class="nav-item"><i class="far fa-file-alt d-inline-block"></i>@Html.ActionLink("Resume", "Index", "Resume", null, new { @class = "nav-link d-inline-block" })</li>
+                    <li class="nav-item"><i class="fas fa-briefcase d-inline-block"></i>@Html.ActionLink("BusinessProfile", "Index", "BusinessProfile", null, new { @class = "nav-link d-inline-block" })</li>
+                </ul>
+
+                @using (Html.BeginForm("Index", "BusinessProfile", FormMethod.Get,
+                    new { @class = "form-inline navbar-form navbar-left", @style = "width: 40%;"}))
+                {
+                    <div class="form-group">
+                        @Html.TextBox("Search", null, new {
+                       @class = "form-control input-sm",
+                       placeholder = "\uf002",
+                       autocomplete = "off",
+                   })
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Search</button>
+                }
+
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

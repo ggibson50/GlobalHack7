@@ -1,0 +1,21 @@
+﻿@*@model Google.Cloud.Translation.V2.TranslationResult*@
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm("Index", "Translate", FormMethod.Post))
+{
+    <div>
+        @Html.TextBox("inputLanguage", (object)ViewBag.inputLanguage)
+        @Html.TextBox("outputLanguage", (object)ViewBag.outputLanguage)
+        @Html.TextBox("text", (object)ViewBag.text)
+        <input type="submit" value="Translate" />
+    </div>
+}
+
+@*@if (Model != null)
+{
+    <p>@Model.TranslatedText</p>
+}*@

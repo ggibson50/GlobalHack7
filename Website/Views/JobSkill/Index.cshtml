@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Website.ViewModels.JobSkillInfo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="main-container-wrap">
+    <h2>@ViewBag.Title</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>&nbsp;</th>
+            <th>
+                @Html.DisplayNameFor(model => model.SkillType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SkillCategory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobSkillName)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @if (!string.IsNullOrWhiteSpace(item.Image))
+                    {
+                        <img src="~/Content/SkillImages/@item.Image" height="70" width="70" />
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SkillType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SkillCategory)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JobSkillName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.JobSkillId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.JobSkillId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.JobSkillId })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

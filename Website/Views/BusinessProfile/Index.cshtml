@@ -1,0 +1,85 @@
+﻿@*@model Website.Models.BusinessProfile*@
+@model Website.ViewModels.BusinessProfileSearchResults
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Business Profile";
+}
+
+<div class="main-container-wrap">
+    <h2>@ViewBag.Title</h2>
+
+    @using (Html.BeginForm("Index", "BusinessProfile", FormMethod.Get))
+    {
+        var industries = new SelectList(Model.Industries, "IndustryId", "IndustryName");
+        <div class="mb-3">
+            @Html.DropDownListFor(bp => bp.IndustryId, industries, "(All)")
+            @Html.EditorFor(bp => bp.Search, new { htmlAttributes = new { placeholder = "search" } })
+
+            <input class="btn btn-primary" type="submit" value="Search" />
+            <button class="btn btn-default">@Html.ActionLink("Create New", "Create")</button>
+
+        </div>
+    }
+
+    <table class="table">
+        <tr>
+            <th>
+                Image
+            </th>
+            <th>
+                Business
+            </th>
+            <th>
+                Industry
+            </th>
+            <th>
+                Summary
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Results)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Image)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BusinessName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Industry.IndustryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShortBusinessDescription)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.BusinessId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.BusinessId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.BusinessId })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div>
+        @Html.PagedListPager(
+            Model.Results,
+            page => Url.Action("Index", new
+            {
+                Search = Model.Search,
+                IndustryId = Model.IndustryId,
+                Page = page,
+                ItemsPerPage = Model.Results.PageSize,
+            }),
+            new PagedListRenderOptions {
+                Display = PagedListDisplayMode.IfNeeded,
+                DisplayPageCountAndCurrentLocation = true,
+                DisplayEllipsesWhenNotShowingAllPageNumbers = true,
+                MaximumPageNumbersToDisplay = 5,
+                PageCountAndCurrentLocationFormat = "Page {0} of {1}"
+            }
+        )
+    </div>
+</div>

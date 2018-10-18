@@ -1,0 +1,115 @@
+﻿@model Website.ViewModels.WorkResults
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="main-container-wrap">
+    <h2>@ViewBag.Title</h2>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Resume</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Resume.ResumeId)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Resume.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Resume.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Resume.FirstName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Resume.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Resume.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Resume.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Resume.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Resume.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Resume.PhoneNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Resume.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Resume.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Resume.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div>
+                <table class="table">
+                    <tr>
+                        <th>
+                            BusinessName
+                        </th>
+                        <th>
+                            Start Date
+                        </th>
+                        <th>
+                            End Date
+                        </th>
+                        <th>
+                            Job Title
+                        </th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model.WorkExperiences)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BusinessName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StartDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EndDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.JobTitle)
+                            </td>
+                            <td rowspan="2">
+                                @Html.ActionLink("Edit", "Edit", "WorkExperience", new { id = item.WorkExperienceId }, null) |
+                                @Html.ActionLink("Details", "Details", "WorkExperience", new { id = item.WorkExperienceId }, null) |
+                                @Html.ActionLink("Delete", "Delete", "WorkExperience", new { id = item.WorkExperienceId }, null)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                        </tr>
+
+                    }
+                </table>
+                @Html.ActionLink("Add Skill", "Edit", "ResumeSkill", new { resumeId = Model.Resume.ResumeId.ToString() }, null)
+                <br />@Html.ActionLink("Add Work Experience", "Create", "WorkExperience", new { resumeId = Model.Resume.ResumeId.ToString() }, null)
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

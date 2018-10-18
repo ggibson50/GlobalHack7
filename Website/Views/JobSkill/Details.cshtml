@@ -1,0 +1,43 @@
+﻿@model Website.Models.JobSkill
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="main-container-wrap">
+    <h2>@ViewBag.Title</h2>
+
+    <div>
+        <h4>JobSkill</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.SkillType)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SkillType)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SkillCategory)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SkillCategory)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.JobSkillName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.JobSkillName)
+            </dd>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.JobSkillId }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</div>

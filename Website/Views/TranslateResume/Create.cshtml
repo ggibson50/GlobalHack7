@@ -1,0 +1,144 @@
+﻿@model Website.Models.Resume
+@{
+    ViewBag.Title = "Translate";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@*original resume*@
+
+<div style="display: inline-block; vertical-align: top; width: 45%;">
+    <br />
+    <h4> Original Resume</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OriginalResume.FirstName)
+        </dt>
+
+        <dd>
+            *****
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OriginalResume.LastName)
+        </dt>
+
+        <dd>
+            *****
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OriginalResume.PhoneNumber)
+        </dt>
+
+        <dd>
+            *****
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OriginalResume.Email)
+        </dt>
+
+        <dd>
+            *****
+        </dd>
+        @if (Model.OriginalResume.WorkExperiences.Any())
+        {
+            <dt>
+                Work Experience
+            </dt>
+            foreach (var items in Model.OriginalResume.WorkExperiences)
+            {
+                <dd>
+                    Business Name: @Html.DisplayFor(modelitem => items.BusinessName)
+                </dd>
+                <dd>
+                    Job Title: @Html.DisplayFor(modelitem => items.JobTitle)
+                </dd>
+                <dd>
+                    Dates: @Html.DisplayFor(modelitem => items.StartDate) - @Html.DisplayFor(modelitem => items.EndDate)
+                </dd>
+                <dd>
+                    Description: @Html.DisplayFor(modelitem => items.Description)
+                </dd>
+                <br />
+            }
+        }
+    </dl>
+</div>
+
+@*new resume*@
+<div style="display: inline-block; vertical-align: top;">
+    <br />
+    @using (Html.BeginForm())
+    {
+        <h4>Translated Resume</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+
+            <dd>
+                *****
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+
+            <dd>
+                *****
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </dt>
+
+            <dd>
+                *****
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                *****
+            </dd>
+            @if (Model.OriginalResume.WorkExperiences.Any())
+            {
+                <dt>
+                    Work Experience
+                </dt>
+                foreach (var items in Model.OriginalResume.WorkExperiences)
+                {
+                    <dd>
+                        Business Name: @Html.EditorFor(modelitem => items.BusinessName, new { htmlAttributes = new { @class = "form-control" } })
+                    </dd>
+                    <dd>
+                        Job Title: @Html.EditorFor(modelitem => items.JobTitle, new { htmlAttributes = new { @class = "form-control" } })
+                    </dd>
+                    <dd>
+                        Dates: @Html.DisplayFor(modelitem => items.StartDate) - @Html.DisplayFor(modelitem => items.EndDate)
+                    </dd>
+                    <dd>
+                        @Html.EditorFor(modelitem => items.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    </dd>
+                    <br />
+                }
+            }
+        </dl>
+        <input type="submit" value="Submit Translation" style="float: right;" />
+    }
+</div>
+
+
+<div>
+    @Html.ActionLink("Back to Original", "Details", "Resume", new { id = Model.OriginalResumeId}) 
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
